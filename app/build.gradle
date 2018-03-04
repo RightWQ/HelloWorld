@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        applicationId "com.example.helloworld"    //全球唯一的字符串
+        minSdkVersion 15    //最小SDK版本
+        targetSdkVersion 26    //目标SDK版本
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        repositories {
+            maven {
+                url "https://maven.google.com"
+            }
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //本地依赖
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    testCompile 'junit:junit:4.12'
+    //    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'    //远程依赖
+    compile files('libs/fastjson-1.2.2-sources.jar')    //库依赖
+    compile files('libs/fastjson-1.2.2.jar')
+}
